@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 public class Booking {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long id; //UUID?
 
     @Column(nullable = false)
     private LocalDateTime startTime;

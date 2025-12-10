@@ -14,10 +14,11 @@ import lombok.NoArgsConstructor;
 public class Room {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long id; //UUID ?
 
     @Column(nullable = false)
     private String name;
+    
     private int capacity;
     private String location;
 }
