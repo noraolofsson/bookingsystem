@@ -5,6 +5,9 @@ import com.example.bookingsystem.service.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import com.example.bookingsystem.dto.RoomRequest;
+import com.example.bookingsystem.dto.RoomResponse;
+
 import java.util.List;
 
 @RestController
@@ -18,8 +21,8 @@ public class RoomController {
     }
 
     @PostMapping
-    public Room createRoom(@RequestBody Room room) {
-        return roomService.createRoom(room);
+    public RoomResponse createRoom(@RequestBody RoomRequest roomRequest) {
+        return roomService.createRoom(roomRequest);
     }
 
     @GetMapping("/{id}")

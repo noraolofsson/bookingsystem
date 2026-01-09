@@ -5,6 +5,9 @@ import com.example.bookingsystem.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import com.example.bookingsystem.dto.UserRequest;
+import com.example.bookingsystem.dto.UserResponse;
+
 import java.util.List;
 
 @RestController
@@ -18,8 +21,8 @@ public class UserController {
     }
 
     @PostMapping
-    public User createUser(@RequestBody User user) {
-        return userService.createUser(user);
+    public UserResponse createUser(@RequestBody UserRequest userRequest) {
+        return userService.createUser(userRequest);
     }
 
     @GetMapping

@@ -5,6 +5,9 @@ import com.example.bookingsystem.repository.RoomRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.bookingsystem.dto.RoomRequest;
+import com.example.bookingsystem.dto.RoomResponse;
+
 import java.util.List;
 
 @Service
@@ -16,9 +19,20 @@ public class RoomService {
         this.roomRepository = roomRepository;
     }
 
-    public Room createRoom(Room room) {
-        // add logic, e.g name can't be empty etc
-        return roomRepository.save(room);
+    public RoomResponse createRoom(RoomRequest roomRequest) {
+        Room room = new Room();
+        room.setName(roomRequest.name());
+        room.setCapacity(roomRequest.capacity());
+        room.setLocation(roomRequest.location());
+
+        Room savedRoom = roomRepository.save(room);
+
+        return new RoomResponse(
+            savedRoom.getId(),
+            savedRoom.getName(),
+            savedRoom.getCapacity(),
+            savedRoom.getLocation()
+        );
     }
 
     public List<Room> getAllRooms() {
