@@ -3,8 +3,6 @@ package com.example.bookingsystem.service;
 import com.example.bookingsystem.entity.Booking;
 import com.example.bookingsystem.entity.Room;
 import com.example.bookingsystem.entity.User;
-
-import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +12,9 @@ import org.springframework.transaction.annotation.Transactional;
 import com.example.bookingsystem.repository.BookingRepository;
 import com.example.bookingsystem.repository.RoomRepository;
 import com.example.bookingsystem.repository.UserRepository;
+
+import com.example.bookingsystem.dto.BookingRequest;
+import com.example.bookingsystem.dto.BookingResponse;
 
 @Service
 public class BookingService {
@@ -29,18 +30,18 @@ public class BookingService {
     }
     
     @Transactional
-    public Booking createBooking(Long userId, Long roomId, LocalDateTime startTime, LocalDateTime endTime) {
-        if(endTime.isBefore(startTime)){
+    public BookingResponse createBooking(BookingRequest bookingRequest) {
+        if(bookingRequest.endTime().isBefore(bookingRequest.startTime())){
             throw new IllegalArgumentException("End time must be after start time");
         }
 
-        User user = userRepository.findById(userId)
+        User user = userRepository.findById(bookingRequest.userId())
             .orElseThrow(() -> new RuntimeException("can't find user"));
 
-        Room room = roomRepository.findById(roomId)
+        Room room = roomRepository.findById(bookingRequest.roomId())
             .orElseThrow(() -> new RuntimeException("can't find room"));
 
-        List<Booking> overlapping = bookingRepository.findOverlappingBookings(roomId, startTime, endTime);
+        List<Booking> overlapping = bookingRepository.findOverlappingBookings(room.getId(), bookingRequest.startTime(), bookingRequest.endTime());
 
         if(!overlapping.isEmpty()){
             throw new RuntimeException("The room is already booked during this period");
@@ -49,9 +50,17 @@ public class BookingService {
         Booking booking = new Booking();
         booking.setUser(user);
         booking.setRoom(room);
-        booking.setEndTime(endTime);
-        booking.setStartTime(startTime);
+        booking.setEndTime(bookingRequest.endTime());
+        booking.setStartTime(bookingRequest.startTime());
 
-        return bookingRepository.save(booking);
+        Booking savedBooking = bookingRepository.save(booking);
+
+        return new BookingResponse(
+            savedBooking.getId(),
+            savedBooking.getUser().getId(),
+            savedBooking.getRoom().getId(),
+            savedBooking.getStartTime(),
+            savedBooking.getEndTime()
+        );
     }
 }
