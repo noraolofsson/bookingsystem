@@ -60,4 +60,7 @@ The server will start on http://localhost:8080.
 | Rooms      | POST   | /api/rooms       | Create a new room |
 | Rooms      | GET    | /api/rooms/{id}  | Get details of a specific room |
 
-
+---
+Author:  
+Nora Olofsson  
+www.linkedin.com/in/noraolofsson01  
