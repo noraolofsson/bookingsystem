@@ -1,7 +1,9 @@
 package com.example.bookingsystem.service;
 
 import com.example.bookingsystem.dto.UserResponse;
+import com.example.bookingsystem.dto.RoomResponse;
 import com.example.bookingsystem.dto.UserRequest;
+import com.example.bookingsystem.entity.Room;
 import com.example.bookingsystem.entity.User;
 
 import com.example.bookingsystem.repository.UserRepository;
@@ -20,6 +22,14 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
+    private UserResponse mapToResponse(User user) {
+        return new UserResponse(
+            user.getId(),
+            user.getEmail(),
+            user.getName()
+        );
+    }
+
     public UserResponse createUser(UserRequest userRequest) {
         // check if email is already used
         if (userRepository.findByEmail(userRequest.email()).isPresent()) {
@@ -32,14 +42,13 @@ public class UserService {
 
         User savedUser = userRepository.save(user);
 
-        return new UserResponse(
-            savedUser.getId(),
-            savedUser.getEmail(),
-            savedUser.getName()
-        );
+        return mapToResponse(savedUser);
     }
 
-    public List<User> getAllUsers() {
-        return userRepository.findAll();
+    public List<UserResponse> getAllUsers() {
+        return userRepository.findAll()
+            .stream()
+            .map(this::mapToResponse)
+            .toList();
     }
 }
