@@ -39,9 +39,9 @@ Transactional Integrity: Critical operations use @Transactional to ensure that b
 ---
 
 ## Getting started
-1. Clone the repository
-git clone [https://github.com/DIN-ANVÄNDARE/bookingsystem.git](https://github.com/DIN-ANVÄNDARE/bookingsystem.git)
-cd bookingsystem
+1. Clone the repository  
+git clone [https://github.com/DIN-ANVÄNDARE/bookingsystem.git](https://github.com/DIN-ANVÄNDARE/bookingsystem.git)  
+cd bookingsystem  
 
 2. start the database
 docker-compose up -d
