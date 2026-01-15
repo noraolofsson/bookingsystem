@@ -19,6 +19,15 @@ public class RoomService {
         this.roomRepository = roomRepository;
     }
 
+    private RoomResponse mapToResponse(Room room) {
+        return new RoomResponse(
+            room.getId(),
+            room.getName(),
+            room.getCapacity(),
+            room.getLocation()
+        );
+    }
+
     public RoomResponse createRoom(RoomRequest roomRequest) {
         Room room = new Room();
         room.setName(roomRequest.name());
@@ -27,20 +36,19 @@ public class RoomService {
 
         Room savedRoom = roomRepository.save(room);
 
-        return new RoomResponse(
-            savedRoom.getId(),
-            savedRoom.getName(),
-            savedRoom.getCapacity(),
-            savedRoom.getLocation()
-        );
+        return mapToResponse(savedRoom);
     }
 
-    public List<Room> getAllRooms() {
-        return roomRepository.findAll();
+    public List<RoomResponse> getAllRooms() {
+        return roomRepository.findAll()
+            .stream()
+            .map(this::mapToResponse)
+            .toList();
     }
     
-    public Room getRoom(Long id) {
-        return roomRepository.findById(id)
+    public RoomResponse getRoom(Long id) {
+        Room room = roomRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Room not found"));
+        return mapToResponse(room);
     }
 }

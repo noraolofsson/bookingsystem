@@ -1,3 +1,14 @@
+error id: file://<WORKSPACE>/src/main/java/com/example/bookingsystem/controller/RoomController.java:_empty_/RoomRequest#
+file://<WORKSPACE>/src/main/java/com/example/bookingsystem/controller/RoomController.java
+empty definition using pc, found symbol in pc: _empty_/RoomRequest#
+empty definition using semanticdb
+empty definition using fallback
+non-local guesses:
+
+offset: 689
+uri: file://<WORKSPACE>/src/main/java/com/example/bookingsystem/controller/RoomController.java
+text:
+```scala
 package com.example.bookingsystem.controller;
 
 import com.example.bookingsystem.entity.Room;
@@ -21,18 +32,25 @@ public class RoomController {
     }
 
     @PostMapping
-    public RoomResponse createRoom(@RequestBody RoomRequest roomRequest) {
+    public RoomResponse createRoom(@RequestBody Ro@@omRequest roomRequest) {
         return roomService.createRoom(roomRequest);
     }
 
     @GetMapping("/{id}")
-    public RoomResponse getRoom(@PathVariable Long id) {
+    public Room getRoom(@PathVariable Long id) {
         return roomService.getRoom(id);
     }
 
     @GetMapping
-    public List<RoomResponse> getAllRooms() {
+    public List<Room> getAllRooms() {
         return roomService.getAllRooms();
     }
 
 }
+
+```
+
+
+#### Short summary: 
+
+empty definition using pc, found symbol in pc: _empty_/RoomRequest#
