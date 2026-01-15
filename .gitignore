@@ -31,3 +31,27 @@ build/
 
 ### VS Code ###
 .vscode/
+.idea/
+*.iml
+.classpath
+.project
+.settings/
+
+### Build files ###
+target/
+*.class
+*.jar
+*.war
+
+### Metals ###
+.metals/
+.bloop/
+metals.log
+*.log
+
+### OS ###
+.DS_Store
+Thumbs.db
+
+### Environment ###
+.env
