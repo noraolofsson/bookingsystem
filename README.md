@@ -39,14 +39,14 @@ Transactional Integrity: Critical operations use @Transactional to ensure that b
 ---
 
 ## Getting started
-1. Clone the repository  
+1. Clone the repository:  
 git clone [https://github.com/DIN-ANVÄNDARE/bookingsystem.git](https://github.com/DIN-ANVÄNDARE/bookingsystem.git)  
 cd bookingsystem  
 
-2. start the database
+2. start the database:  
 docker-compose up -d
 
-3. Run the Application
+3. Run the Application:  
 mvn spring-boot:run
 
 The server will start on http://localhost:8080.
