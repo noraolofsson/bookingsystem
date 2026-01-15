@@ -54,3 +54,10 @@ The server will start on http://localhost:8080.
 ---
 ## API Reference
 
+| Resource | Method | Endpoint | Description |
+|------------|--------|---------|-------------|
+| Rooms      | GET    | /api/rooms       | Get a list of all rooms |
+| Rooms      | POST   | /api/rooms       | Create a new room |
+| Rooms      | GET    | /api/rooms/{id}  | Get details of a specific room |
+
+
