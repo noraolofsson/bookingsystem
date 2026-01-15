@@ -30,13 +30,6 @@ This project demonstrates a production-ready backend architecture focusing on da
 
 The application follows a layered architecture to ensure maintainability and testability.
 
-```mermaid
-graph LR
-    Client((Client)) --> Controller[Controller Layer]
-    Controller --> Service[Service Layer]
-    Service --> Repository[Repository Layer]
-    Repository --> DB[(PostgreSQL)]
-
 Service Layer handles Business Logic: The controller is "dumb" and only handles HTTP requests. All validation (e.g., Is the room free?) happens in the Service.
 
 DTOs (Data Transfer Objects): I chose to use Records for DTOs to ensure immutability. This prevents exposing the raw Database Entities to the client, solving issues like infinite recursion and over-fetching data.
